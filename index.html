@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>IP Grabber v2.3.1</title>
+  <style>
+    body {
+      background-color: #0d0d0d;
+      color: #33ff33;
+      font-family: Consolas, monospace;
+      font-size: 16px;
+      padding: 20px;
+      overflow: hidden;
+    }
+
+    #title {
+      font-size: 22px;
+      color: #00ffcc;
+      margin-bottom: 20px;
+    }
+
+    #console {
+      white-space: pre-wrap;
+      line-height: 1.5;
+    }
+
+    #cursor {
+      display: inline-block;
+      width: 10px;
+      background-color: #33ff33;
+      animation: blink 1s step-start infinite;
+    }
+
+    @keyframes blink {
+      50% { background-color: transparent; }
+    }
+  </style>
+</head>
+<body>
+  <div id="title">[IP Grabber v2.3.1] - Network Reconnaissance Suite</div>
+  <div id="console">[BOOT] Initializing modules...</div><span id="cursor"></span>
+
+  <script>
+    const consoleDiv = document.getElementById("console");
+    const cursor = document.getElementById("cursor");
+
+    const fakeLogs = [
+      "[INFO] Connecting to target host...",
+      "[INFO] Performing handshake...",
+      "[OK] Connection established.",
+      "[INFO] Extracting IP address...",
+      "[IP] 192.88.134.12",
+      "[INFO] Running reverse DNS lookup...",
+      "[DNS] dynamic-192-88-134-12.dsl.provider.net",
+      "[INFO] Geolocation: Berlin, Germany",
+      "[INFO] ISP: Deutsche Telekom AG",
+      "[INFO] Browser Fingerprint: Chrome 125, Windows 10",
+      "[INFO] Running port scan...",
+      "[PORT] 80/tcp - OPEN",
+      "[PORT] 443/tcp - OPEN",
+      "[PORT] 21/tcp - CLOSED",
+      "[INFO] Traceroute started...",
+      "[HOP 1] 192.168.1.1 (Local Router)",
+      "[HOP 2] 10.244.0.1 (ISP Node)",
+      "[HOP 3] 192.88.134.1 (DE-CIX Frankfurt)",
+      "[INFO] DNS Records Found",
+      "[MX] mail.provider.net",
+      "[SPF] v=spf1 include:_spf.provider.net ~all",
+      "[INFO] Logging session to /logs/192.88.134.12/session.log",
+      "[DONE] Operation completed successfully."
+    ];
+
+    let i = 0;
+    function printLine() {
+      if (i < fakeLogs.length) {
+        consoleDiv.innerHTML += "\n" + fakeLogs[i];
+        i++;
+        let delay = Math.floor(Math.random() * 600) + 300;
+        setTimeout(printLine, delay);
+      }
+    }
+
+    setTimeout(printLine, 1000);
+  </script>
+</body>
+</html>
